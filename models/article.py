@@ -13,18 +13,9 @@ class Article(object):
 		article.download()
 		article.parse()
 
-		punctuation = { 0x2018:0x27, 0x2019:0x27, 0x201C:0x22, 0x201D:0x22 }
+		raw_text = article.text
 
-		raw_text = article.text.replace(u"\u2018", "'").replace(u"\u2019", "'").replace(u"\u201c","'").replace(u"\u201d", "'")
-
-		raw_text.translate(punctuation).encode('utf-8')
-
-		print raw_text.split('\n\n')
-
-		# print raw_text
-
-		# return article.text
-
+		# TODO: Paste Byron's unicode parsing shit here
 
 	def get_sentiment(self, text):
 		return indicoio.sentiment("TODO FIGURE OUT REPRESENTATION OF DATA")
