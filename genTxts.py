@@ -10,8 +10,10 @@ def get_text(filename, directory):
 
     text = a.text
 
-    text.replace(u'\u201d', u'"')
-    text.replace(u'\u201c', u'"')
+    text = text.encode("ascii", 'backslashreplace')
+    text = text.replace('\\u201d', '"')
+    text = text.replace('\\u201c', '"')
+    text = text.replace('\\u2019', '\'')
 
     return text.split('\n\n')
 
