@@ -4,4 +4,5 @@ import logging
 logging.basicConfig(stream=sys.stderr)
 sys.path.insert(0,"var/www/html/")
 
-from moose import app as application
+from Moose import app as application
+application.secret_key = 'Add your secret key'
