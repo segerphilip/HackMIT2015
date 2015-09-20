@@ -16,12 +16,13 @@ def requested_query():
         if text == '':
             return start()
     
-        return article(text)
+        return search(text)
 
     return start()
 
-@app.route('/test')
-def article(text):
+@app.route('/aggregate')
+def search(text):
+    print text
     query = Query(text)
     # facts, title, url, sentiment, political, summary
     query.create_fake()
@@ -29,4 +30,4 @@ def article(text):
 
 if __name__ == '__main__':
     # app.debug = True
-    app.run()
+    app.run(debug=True)
