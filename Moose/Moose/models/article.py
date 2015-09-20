@@ -1,6 +1,7 @@
 from newspaper import Article as NewsArticle
 import sys
 import os
+sys.path.append('./tools')
 sys.path.append('../tools')
 from FrequencySummarizer import FrequencySummarizer
 import indicoio
@@ -18,7 +19,7 @@ class Article(object):
         # self.political = self._get_political()
         # self.summary = self._get_summary()
 
-        self.summarizer = FrequencySummarizer()
+        #self.summarizer = FrequencySummarizer()
 
     def _get_source(self):
         article = NewsArticle(self.url)
