@@ -112,9 +112,13 @@ class Query(object):
     def fetch_articles(self):
         # TODO: REIMPLEMENT get_urls & not tmp
         urls = self.get_urls_tmp()
+        #urls = self.get_urls()
         firsts = []
         for i in urls:
-            firsts.append(urls[i][0])
+            try:
+                firsts.append(urls[i][0])
+            except:
+                pass
 
         Articles = []
         for link in firsts:
