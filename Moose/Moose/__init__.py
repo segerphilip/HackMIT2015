@@ -28,5 +28,5 @@ def article(text):
     return render_template('index.html', facts=query.facts, articles=query.articles)
 
 if __name__ == '__main__':
-    app.debug = True
+    # app.debug = True
     app.run()
