@@ -25,7 +25,7 @@ class Article(object):
         return raw_text.split('\n\n')
 
     def get_sentiment(self, text):
-        return indicoio.sentiment("TODO FIGURE OUT REPRESENTATION OF DATA")
+        return (sum(indicoio.sentiment(sentence) for sentence in text))/float(len(text))
 
 
     def check_for_quotes(self, line):
@@ -59,4 +59,5 @@ class Article(object):
 if __name__ == "__main__":
     myArticle = Article("http://www.theguardian.com/us-news/2015/sep/19/ted-cruz-hillary-clinton-mackinac-republican-leadership-conference")
 
-    myArticle.get_source()
+    print myArticle.get_source()
+
