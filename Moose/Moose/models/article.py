@@ -59,7 +59,7 @@ class Article(object):
         return indicoio.political(" ".join(self.text))
 
     def _get_summary(self):
-        return self.summarizer.summarize(" ".join(self.text), 5)
+        return " ".join(self.summarizer.summarize(" ".join(self.text), 5))
 
     def _check_for_quotes(self, line):
         count = line.count('"')
@@ -104,7 +104,7 @@ class Article(object):
         return quotes
 
 if __name__ == "__main__":
-    # myArticle = Article("http://www.cnn.com/2015/09/19/politics/donald-trump-muslims-controversy/index.html")
+    myArticle = Article("http://www.cnn.com/2015/09/19/politics/donald-trump-muslims-controversy/index.html")
 
     #print myArticle.get_source()
     for i in myArticle.quotes:
