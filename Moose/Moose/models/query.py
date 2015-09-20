@@ -2,7 +2,7 @@ import urllib
 import requests
 import os
 import json
-from article_us import Article
+from article import Article
 from facts import Facts
 
 
