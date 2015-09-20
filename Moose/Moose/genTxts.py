@@ -14,6 +14,7 @@ def get_text(filename, directory):
     text = text.replace('\\u201d', '"')
     text = text.replace('\\u201c', '"')
     text = text.replace('\\u2019', '\'')
+    text = text.replace('\\u2018', '\'')
 
     return text#.split('\n\n')
 
