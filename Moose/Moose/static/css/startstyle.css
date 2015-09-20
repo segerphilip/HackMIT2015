@@ -9,6 +9,7 @@
     left: 0;
     bottom: 0;
     right: 0;
+    z-index:-1;
 
     /*background-image: url("../images/background.jpg");*/
     background-repeat:no-repeat;
@@ -76,3 +77,16 @@ form
     transform: translateY(70%);*/
 }
 
+#loading {
+    z-index: 1000;
+    display: absolute;
+}
+
+#loading img{
+    display:none;
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    z-index: 1000;
+}
