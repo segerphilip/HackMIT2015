@@ -15,7 +15,7 @@ def get_text(filename, directory):
     text = text.replace('\\u201c', '"')
     text = text.replace('\\u2019', '\'')
 
-    return text.split('\n\n')
+    return text#.split('\n\n')
 
 
 if __name__ == '__main__':
@@ -25,12 +25,11 @@ if __name__ == '__main__':
             "ny.txt":"http://www.nytimes.com/2015/09/19/us/irving-police-chief-defends-response-to-ahmed-mohameds-clock.html"
             }
 
+    directory = 'ArticleTest'
+
     for filename in urls:
         print filename
-        text = get_text(filename, 'ArticleTest')
-        print text
-        print len(text)
-        exit()
+        text = get_text(filename, directory)
 
         with open(os.path.join(directory,filename), 'w') as output:
             output.write(text)

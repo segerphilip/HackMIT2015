@@ -33,8 +33,7 @@ def getQuotes( text ):
 
 if __name__ == '__main__':
     directory = 'ArticleTest/'
-    #articles = ['cnn.txt','guard.txt','huff.txt', 'ny.txt']
-    articles = ['guard.txt','huff.txt', 'ny.txt']
+    articles = ['cnn.txt','guard.txt','huff.txt', 'ny.txt']
     articles = [ os.path.join(directory, i) for i in articles]
     
     master = {}
@@ -47,5 +46,3 @@ if __name__ == '__main__':
             article_dict['quotes'] = getQuotes( f )
 
         master['articles'].append(article_dict)
-
-    print master['articles']
