@@ -26,6 +26,8 @@ class Article(object):
     def get_sentiment(self, text):
         return (sum(indicoio.sentiment(sentence) for sentence in text))/float(len(text))
 
+    def get_political(self, text):
+        return (sum(indicoio.political(sentence) for sentence in text))/float(len(text))
 
     def check_for_quotes(self, line):
         count = line.count('"')
