@@ -6,7 +6,7 @@
 
 div#content {
     display: none;
-    }
+    }*/
  
 div#loading {
     top: 200 px;
@@ -15,7 +15,7 @@ div#loading {
     z-index: 1000;
     width: 160px;
     height: 24px;
-    /*background: url(loadingimage.gif) no-repeat;*/
+    background: url(loadingimage.gif) no-repeat;
     cursor: wait;
     }
 
