@@ -55,7 +55,7 @@
     Loading…
  </div><div id="loading"></div>
 
-<div id="content">your html content here......</div>
+<div id="content"></div>
         
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -93,6 +93,7 @@
             <div class="row">
                 <div class="col-lg-12">
                 <!-- {'title':[], 'url':[], 'sentiment':[], 'political':[], 'summary':[]} -->
+                    
                     {% for val in facts %}
                         <h1>{{ val }}</h1>
                     {% endfor %}
@@ -110,9 +111,11 @@
                         <p>{{ thing.title }}</p>
                         <p>{{ thing.url }}</p>
                         <p>{{ thing.sentiment }}</p>
-                        <p>{{ thing.political }}</p>
+                        {% for key in thing.political %}
+                            <p>{{ key }} : {{ thing.political[key] }}</p>
+                        {% endfor %}
                         <p>{{ thing.summary }}</p>
-                    {% endfor %}    
+                    {% endfor %}
                 </div>
             </div>
         </div>
