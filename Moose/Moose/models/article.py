@@ -46,7 +46,7 @@ class Article(object):
         potential = []
 
         # Get potential quotes
-        keywords = ['said', 'says', 'told']
+        keywords = ['said', 'says', 'told', '"'] # Possibly only need " character
         for line in self.raw_text:
             if [ True for i in keywords if i in line ]: 
                 potential.append(line)
@@ -55,7 +55,6 @@ class Article(object):
         new = []
         for line in potential:
             while( line.find('.') < line.find('"') ):
-                print "Yup"
                 line = line[line.find('.')+1:].strip()
                 new.append(line)
             else:
