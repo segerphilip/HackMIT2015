@@ -93,8 +93,24 @@ class Query(object):
 
     def choosing_quotes(self, Articles):
         total_quotes = []
+        total_length = 0
+        count = 0
         for item in Articles:
-            pass
+            for i in item.quotes:
+                tmp = len(''.join(item.quotes[i]))
+                total_length += tmp
+                count += 1
+
+        average = total_length/float(count)
+
+        for item in Articles:
+            for i in item.quotes:
+                tmp = len(''.join(item.quotes[i]))
+                if tmp > average:
+                    total_quotes.append(i)
+
+        #print total_quotes
+        self.facts = total_quotes
 
     def fetch_articles(self):
         # TODO: REIMPLEMENT get_urls & not tmp
@@ -113,7 +129,10 @@ class Query(object):
 if __name__ == '__main__':
     test = Query('ahmed mohamed')
 
-    print test.articles
+    #print test.articles
+    for i in test.facts:
+        print i
+        print
 
     #test.create_fake()
 
