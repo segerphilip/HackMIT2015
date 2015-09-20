@@ -25,11 +25,10 @@
             $("#positioning").fadeIn("slow")
             $("#funnlbutton").click(function(){
                 $("#funnlsearch").fadeOut("fast", function(){
-                    // Do some shit?
+                    $('#positioning').slideDown(1000)
+                    $('#gallery-background').fadeOut("slow")
                 });
-                // $('#gallery-background').hide()
-                $('#loading').fadeIn("slow")
-                $('#gallery-background').fadeOut("slow")
+                
             });
         });
     </script>

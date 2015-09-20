@@ -96,7 +96,7 @@
             <div class="row">
                 <div class="col-lg-9">
                 <!-- {'title':[], 'url':[], 'sentiment':[], 'political':[], 'summary':[]} -->
-                    
+                    <h1> Story Highlights </h1>
                     {% for val in facts %}
                         <h1 style="font-size:20px">{{ val }}</h1>
                     {% endfor %}
@@ -122,12 +122,13 @@
                         <br>
                         <br>
                         <br>
+                        <br>
                     {% endfor %}
                 </div>
 
                 <div class="col-lg-5">
                     {% for thing in articles %}
-                        <p>{{ thing.summary}}</p>
+                        <p style='font-size:16px'>{{ thing.summary}}</p>
                     {% endfor %}
                 </div>
             </div>
