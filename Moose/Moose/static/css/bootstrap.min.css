@@ -11,17 +11,17 @@
 div h1 {
 	font-family: Roboto-Light;
 	font-size: 22px !important;
-}
+}*/
 
 p {
 	font-family: Roboto-Light;
 	font-size: 16px !important;
 }
 
-div#content {
+/*div#content {
     display: none;
-    }*/
- 
+    }
+ */
 #loading {
     top: 200 px;
     margin: auto;
