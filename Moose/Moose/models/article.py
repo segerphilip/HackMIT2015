@@ -1,12 +1,20 @@
 from newspaper import Article as NewsArticle
+import sys
+import os
+sys.path.append('../tools')
+from FrequencySummarizer import FrequencySummarizer
 import indicoio
 
 class Article(object):
 
+    api_key = os.getenv("INDICO_KEY")
+    indicoio.config.api_key = api_key
+
     def __init__(self, url):
         self.url = url
-        self.raw_text = self.get_source()
+        self.text = self.get_source()
         self.quotes = self.get_quotes()
+        self.summarizer = FrequencySummarizer()
 
     def get_source(self):
         article = NewsArticle(self.url)
@@ -23,11 +31,14 @@ class Article(object):
 
         return raw_text.split('\n\n')
 
-    def get_sentiment(self, text):
-        return (sum(indicoio.sentiment(sentence) for sentence in text))/float(len(text))
+    def get_sentiment(self):
+        return indicoio.sentiment(" ".join(self.text))
 
-    def get_political(self, text):
-        return (sum(indicoio.political(sentence) for sentence in text))/float(len(text))
+    def get_political(self):
+        return indicoio.political(" ".join(self.text))
+
+    def get_summary(self):
+        return self.summarizer.summarize(" ".join(self.text), 5)
 
     def check_for_quotes(self, line):
         count = line.count('"')
@@ -46,7 +57,7 @@ class Article(object):
         quotes = {}
         potential = []
 
-        for line in self.raw_text:
+        for line in self.text:
             if 'said' in line or 'says' in line or 'told' in line:
                 potential.append(line)
 
@@ -58,7 +69,8 @@ class Article(object):
         return quotes
 
 if __name__ == "__main__":
-    myArticle = Article("http://www.theguardian.com/us-news/2015/sep/19/ted-cruz-hillary-clinton-mackinac-republican-leadership-conference")
+    myArticle = Article("http://www.bbc.com/news/uk-33438693")
 
-    print myArticle.get_source()
+    # print myArticle.get_source()
+    print myArticle.get_summary()
 
