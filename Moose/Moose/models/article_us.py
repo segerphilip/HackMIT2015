@@ -12,12 +12,12 @@ class Article(object):
     def __init__(self, url):
         self.url = url
         self.text = self._get_source()
-        # self.quotes = self._get_quotes()
-        # self.sentiment = self._get_sentiment()
-        # self.political = self._get_political()
-        # self.summary = self._get_summary()
+        self.quotes = self._get_quotes()
+        self.sentiment = self._get_sentiment()
+        self.political = self._get_political()
+        self.summary = self._get_summary()
 
-        #self.summarizer = FrequencySummarizer()
+        self.summarizer = FrequencySummarizer()
 
     def _get_source(self):
         article = NewsArticle(self.url)
