@@ -116,7 +116,7 @@ class Query(object):
                     total_quotes.append(i)
 
         #print total_quotes
-        self.facts = total_quotes
+        self.facts = total_quotes[:8]
 
     def fetch_articles(self):
         # TODO: REIMPLEMENT get_urls & not tmp
