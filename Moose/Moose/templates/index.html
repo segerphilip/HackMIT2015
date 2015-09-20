@@ -106,8 +106,30 @@
     </section>
 
     <!-- Articles Section -->
-    
+    <!--
     <section id="about" class="about-section text-left">
+        <div class="container padding">
+            <div class="row">
+                <div class="col-lg-5">
+                    {% for thing in articles %} 
+                    <a style="font-size: 1.5vw" href={{thing.url}}>{{thing.title}}</a>
+                        <p>Sentiment: {{ "%.2f" % thing.sentiment }}</p>
+                        {% for key in thing.political %}
+                            <p>{{ key }} : {{ "%.2f" % thing.political[key] }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+
+                <div class="col-lg-5">
+                    {% for thing in articles %}
+                        <p>{{ thing.summary}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+     <section id="about" class="about-section text-left">
         <div class="container padding">
             <div class="row">
                 <div class="col-lg-5">
