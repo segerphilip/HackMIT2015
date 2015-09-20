@@ -78,7 +78,6 @@ class Query(object):
             urls.append(line.strip())
 
         f.close()
-        urls = ['http://www.cnn.com/2015/09/16/us/texas-student-ahmed-muslim-clock-bomb/index.html']
         return self.sort_urls(urls)
 
 
