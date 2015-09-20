@@ -12,6 +12,15 @@ class Query(object):
         self.SEARCH_ENGINE_ID = '015040051912301786117:ukzldfl328w'
         self.query = query.replace(' ','+')
 
+        self.facts = []
+        self.articles = []#{'title':[], 'url':[], 'sentiment':[], 'political':[], 'summary':[]}
+
+    def create_fake(self):
+        self.facts = ['Pip is a good man', 'Byron is a person', 'Keenan is Keenan', 'Patrick smells']
+        for i in xrange(10):
+            self.articles.append( {'title':str(i), 'url':'google.com', 'sentiment':str(i*4), 'political':str(i*8), 'summary':'Hello I am summary. This is summary. I will summarize you BITCH'})
+
+
     def generate_query(self, iteration):
         if iteration != 0:
             template = ['https://www.googleapis.com/customsearch/v1?highrange&start=', str(iteration), '&key=',self.API_KEY,'&cx=',self.SEARCH_ENGINE_ID,'&q=', self.query]
@@ -74,7 +83,9 @@ class Query(object):
 
 if __name__ == '__main__':
     test = Query('ahmed mohamed')
-    Articles = test.fetch_articles()
-    facts = Facts(Articles)
-    for i in Articles:
-        print i.quotes
+    test.create_fake()
+
+    #Articles = test.fetch_articles()
+    #facts = Facts(Articles)
+    #for i in Articles:
+    #    print i.quotes
