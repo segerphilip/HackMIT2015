@@ -70,9 +70,9 @@ class Query(object):
         urls = []
 
         try:
-            f = open('backup_urls', 'r')
+            f = open('backup_urls.txt', 'r')
         except:
-            f = open('models/backup_urls','r')
+            f = open('models/backup_urls.txt','r')
 
         for line in f:
             urls.append(line.strip())
