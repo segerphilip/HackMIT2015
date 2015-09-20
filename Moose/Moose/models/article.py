@@ -12,11 +12,15 @@ class Article(object):
 
     def __init__(self, url):
         self.url = url
-        self.text = self.get_source()
-        self.quotes = self.get_quotes()
+        self.text = self._get_source()
+        # self.quotes = self._get_quotes()
+        # self.sentiment = self._get_sentiment()
+        # self.political = self._get_political()
+        # self.summary = self._get_summary()
+
         self.summarizer = FrequencySummarizer()
 
-    def get_source(self):
+    def _get_source(self):
         article = NewsArticle(self.url)
 
         article.download()
@@ -29,18 +33,33 @@ class Article(object):
         raw_text = raw_text.replace('\\u2019', '\'')
         raw_text = raw_text.replace('\\u2018', '\'')
 
-        return raw_text.split('\n\n')
+        raw_text = raw_text.split('\n\n')
 
-    def get_sentiment(self):
+        filtered = self._filter(raw_text)
+
+        return filtered
+
+    def _filter(self, unfiltered_text):
+        filtered_text = []
+        filter_words = ['photo', 'image', 'related', 'copyright', 'photograph', 'related']
+        for sentence in unfiltered_text:
+            lowered = [word.lower() for word in sentence.split()]
+            if not any(word in lowered for word in filter_words):
+                filtered_text.append(sentence)
+
+        return filtered_text
+
+
+    def _get_sentiment(self):
         return indicoio.sentiment(" ".join(self.text))
 
-    def get_political(self):
+    def _get_political(self):
         return indicoio.political(" ".join(self.text))
 
-    def get_summary(self):
+    def _get_summary(self):
         return self.summarizer.summarize(" ".join(self.text), 5)
 
-    def check_for_quotes(self, line):
+    def _check_for_quotes(self, line):
         count = line.count('"')
 
         if count == 0:
@@ -53,7 +72,7 @@ class Article(object):
         quote_object = [ line[locations[i]:locations[i+1]+1] for i in xrange(0,count,2) ]
         return quote_object
 
-    def get_quotes(self):
+    def _get_quotes(self):
         quotes = {}
         potential = []
 
@@ -69,8 +88,8 @@ class Article(object):
         return quotes
 
 if __name__ == "__main__":
-    myArticle = Article("http://www.bbc.com/news/uk-33438693")
+    myArticle = Article("http://www.cnn.com/2015/09/19/politics/donald-trump-muslims-controversy/index.html")
 
-    # print myArticle.get_source()
-    print myArticle.get_summary()
+    # print myArticle._get_source()
+    print myArticle._get_summary()
 
