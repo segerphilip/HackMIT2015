@@ -89,9 +89,13 @@ class Article(object):
         # Extract only the sentence with the quote in it
         new = []
         for line in potential:
-            while( line.find('.') < line.find('"') ):
+            tmp = 0
+            while( line.find('.') < line.find('"') or line.find('.') == 0):
+                tmp +=1 
                 line = line[line.find('.')+1:].strip()
                 new.append(line)
+                if tmp == 50:
+                    break
             else:
                 line = line.strip()
                 new.append(line)

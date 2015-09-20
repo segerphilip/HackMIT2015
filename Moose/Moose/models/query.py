@@ -78,6 +78,7 @@ class Query(object):
             urls.append(line.strip())
 
         f.close()
+        urls = ['http://www.cnn.com/2015/09/16/us/texas-student-ahmed-muslim-clock-bomb/index.html']
         return self.sort_urls(urls)
 
 
@@ -111,10 +112,14 @@ class Query(object):
 
     def fetch_articles(self):
         # TODO: REIMPLEMENT get_urls & not tmp
-        urls = self.get_urls_tmp()
+        #urls = self.get_urls_tmp()
+        urls = self.get_urls()
         firsts = []
         for i in urls:
-            firsts.append(urls[i][0])
+            try:
+                firsts.append(urls[i][0])
+            except:
+                pass
 
         Articles = []
         for link in firsts:
