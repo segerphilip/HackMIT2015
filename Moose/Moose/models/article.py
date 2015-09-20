@@ -21,6 +21,7 @@ class Article(object):
         raw_text = raw_text.replace('\\u2019', '\'')
         raw_text = raw_text.replace('\\u2018', '\'')
         raw_text = raw_text.replace('\\u2026', '...')
+        raw_text = raw_text.replace('\\u2013', '-')
 
         return raw_text.split('\n\n')
 
@@ -33,8 +34,7 @@ class Article(object):
 
         if count == 0:
             return None
-        elif count % 2 != 0:
-            #raise Exception("Quotation marks are not even; error in parsing quotes")
+        elif count % 2 != 0: # TODO: This will be an edge case, ignore for now
             return None
         
         locations = [i for i, ltr in enumerate(line) if ltr == '"']
@@ -45,14 +45,30 @@ class Article(object):
         quotes = {}
         potential = []
 
+        # Get potential quotes
+        keywords = ['said', 'says', 'told']
         for line in self.raw_text:
-            if 'said' in line or 'says' in line or 'told' in line:
+            if [ True for i in keywords if i in line ]: 
                 potential.append(line)
 
+        # Extract only the sentence with the quote in it
+        new = []
+        for line in potential:
+            while( line.find('.') < line.find('"') ):
+                print "Yup"
+                line = line[line.find('.')+1:].strip()
+                new.append(line)
+            else:
+                line = line.strip()
+                new.append(line)
+        potential = new
+
+        # Extract just the quoted section to check for redundancy later on
         for line in potential:
             tmp = self.check_for_quotes(line)
             if tmp != None:
-                quotes[line] = tmp
+                # TODO: Might switch tmp : line, so that quoted section can call full sentence
+                quotes[line] = tmp 
 
         return quotes
 
@@ -60,5 +76,6 @@ if __name__ == "__main__":
     myArticle = Article("http://www.theguardian.com/us-news/2015/sep/19/ted-cruz-hillary-clinton-mackinac-republican-leadership-conference")
 
     #print myArticle.get_source()
-    print myArticle.quotes
-
+    for i in myArticle.quotes:
+        print i
+        print
