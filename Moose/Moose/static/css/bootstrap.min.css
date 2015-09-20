@@ -22,7 +22,7 @@ div#content {
     display: none;
     }*/
  
-div#loading {
+#loading {
     top: 200 px;
     margin: auto;
     position: absolute;

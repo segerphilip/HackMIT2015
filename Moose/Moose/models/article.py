@@ -46,7 +46,7 @@ class Article(object):
 
     def _filter(self, unfiltered_text):
         filtered_text = []
-        filter_words = ['photo', 'image', 'related', 'copyright', 'photograph', 'related']
+        filter_words = ['photo', 'image', 'related', 'copyright', 'photograph', 'watch', 'video', 'youtube', 'advertisement']
         for sentence in unfiltered_text:
             lowered = [word.lower() for word in sentence.split()]
             if not any(word in lowered for word in filter_words):
