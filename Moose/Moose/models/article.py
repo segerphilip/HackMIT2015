@@ -20,6 +20,7 @@ class Article(object):
         raw_text = raw_text.replace('\\u201c', '"')
         raw_text = raw_text.replace('\\u2019', '\'')
         raw_text = raw_text.replace('\\u2018', '\'')
+        raw_text = raw_text.replace('\\u2026', '...')
 
         return raw_text.split('\n\n')
 
@@ -58,5 +59,6 @@ class Article(object):
 if __name__ == "__main__":
     myArticle = Article("http://www.theguardian.com/us-news/2015/sep/19/ted-cruz-hillary-clinton-mackinac-republican-leadership-conference")
 
-    print myArticle.get_source()
+    #print myArticle.get_source()
+    print myArticle.quotes
 
