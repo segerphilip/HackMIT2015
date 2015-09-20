@@ -3,7 +3,7 @@ html {
   min-height: 100%;
   overflow: hidden;
 }
-html body {
+html body div{
   background: #FFFFFF;
   background-size: 163px;
   font: 14px/21px Monaco, sans-serif;
