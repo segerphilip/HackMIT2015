@@ -3,6 +3,9 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+@font-face { font-family: Roboto-Light; src: url("../fonts/Roboto-Light.ttf"); } 
+@font-face { font-family: Roboto-Thin; src: url("../fonts/Roboto-Thin.ttf"); } 
+
 
 body {
     width: 100%;
@@ -38,26 +41,22 @@ of those sections to manage the look and feel of the site. */
     height: 100%;
     padding-top: 150px;
     text-align: center;
-    background: #fff;
+    background: #FFFFFF;
+    font-family: Roboto-Light;
+    font-size: 14px;
+
 }
 
 .about-section {
     height: 100%;
     padding-top: 150px;
     text-align: center;
-    background: #eee;
+    background: #FFFCBD;
+    font-family: Roboto-Light;
+    font-size: 14px;
 }
 
-.services-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #fff;
-}
+div h2  {
 
-.contact-section {
-    height: 100%;
-    padding-top: 150px;
-    text-align: center;
-    background: #eee;
+    font-size: 30px;
 }
