@@ -83,16 +83,7 @@ class Query(object):
 
     def article_information(self):
         Articles = self.fetch_articles()
-
-        for data in Articles:
-            tmp = {}
-            tmp['title'] = data.title
-            tmp['url'] = data.url
-            tmp['sentiment'] = data.sentiment
-            tmp['political'] = data.political
-            tmp['summary'] = data.summary
-
-            self.articles.append(tmp)
+        self.articles = Articles
 
         self.choosing_quotes(Articles)
     
