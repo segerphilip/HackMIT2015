@@ -13,7 +13,7 @@ def article():
     query = Query('')
     # facts, title, url, sentiment, political, summary
     query.create_fake()
-    return render_template('index.html', facts=query.facts, title=query.facts, url=query.url, sentiment=query.url, political=query.url, summary=query.url)
+    return render_template('index.html', facts=query.facts, articles=query.articles)
 
 if __name__ == '__main__':
     app.debug = True

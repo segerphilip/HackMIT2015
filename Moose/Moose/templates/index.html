@@ -83,27 +83,16 @@
     </nav>
 
     <!-- Intro Section -->
-
-    
-
-
-
     <section id="intro" class="intro-section">
         <div class="container">
             <div class="row">
-
-                <div>
-                    <p class="loader">Test</p>
-                 </div>
-                 
-
-
-
-
                 <div class="col-lg-12">
-                    {% for val in test %}
+                    {% for val in facts %}
                         <h1>{{ val }}</h1>
                     {% endfor %}
+                    {% for thing in articles %}
+                        <p>{{ thing['title'] }}</p>
+                    {% endfor %}    
                     <a class="btn btn-default page-scroll" href="#about">Click Me to Scroll Down!</a>
                 </div>
             </div>
