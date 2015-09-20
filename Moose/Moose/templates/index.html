@@ -103,10 +103,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     {% for thing in articles %}
-                        <p>{{ thing.title }}</p>
-                        <p>{{ thing.url }}</p>
-                        <p>{{ thing.sentiment }}</p>
-                        <p>{{ thing.political }}</p>
+                    <a href={{thing.url}}>{{thing.title}}</a>
+                        <p>{{ "%.2f" % thing.sentiment }}</p>
+                        {% for key in thing.political %}
+                            <p>{{ key }} : {{ "%.2f" % thing.political[key] }}</p>
+                        {% endfor %}
                         <p>{{ thing.summary }}</p>
                     {% endfor %}    
                 </div>
