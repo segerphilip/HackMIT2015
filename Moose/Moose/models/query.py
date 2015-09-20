@@ -68,10 +68,16 @@ class Query(object):
 
     def get_urls_tmp(self):
         urls = []
-        with open("".join([os.getcwd(),'/models/backup_urls.txt']), 'r') as f:
-            for line in f:
-                urls.append(line.strip())
 
+        try:
+            f = open('backup_urls', 'r')
+        except:
+            f = open('models/backup_urls','r')
+
+        for line in f:
+            urls.append(line.strip())
+
+        f.close()
         return self.sort_urls(urls)
 
 
