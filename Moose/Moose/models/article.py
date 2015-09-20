@@ -1,14 +1,26 @@
 from newspaper import Article as NewsArticle
+import sys
+import os
+sys.path.append('../tools')
+from FrequencySummarizer import FrequencySummarizer
 import indicoio
 
 class Article(object):
 
+    api_key = os.getenv("INDICO_KEY")
+    indicoio.config.api_key = api_key
+
     def __init__(self, url):
         self.url = url
-        self.raw_text = self.get_source()
-        self.quotes = self.get_quotes()
+        self.text = self._get_source()
+        # self.quotes = self._get_quotes()
+        # self.sentiment = self._get_sentiment()
+        # self.political = self._get_political()
+        # self.summary = self._get_summary()
 
-    def get_source(self):
+        self.summarizer = FrequencySummarizer()
+
+    def _get_source(self):
         article = NewsArticle(self.url)
 
         article.download()
@@ -20,43 +32,81 @@ class Article(object):
         raw_text = raw_text.replace('\\u201c', '"')
         raw_text = raw_text.replace('\\u2019', '\'')
         raw_text = raw_text.replace('\\u2018', '\'')
+        raw_text = raw_text.replace('\\u2026', '...')
+        raw_text = raw_text.replace('\\u2013', '-')
 
-        return raw_text.split('\n\n')
+        raw_text = raw_text.split('\n\n')
 
-    def get_sentiment(self, text):
-        return (sum(indicoio.sentiment(sentence) for sentence in text))/float(len(text))
+        filtered = self._filter(raw_text)
+
+        return filtered
+
+    def _filter(self, unfiltered_text):
+        filtered_text = []
+        filter_words = ['photo', 'image', 'related', 'copyright', 'photograph', 'related']
+        for sentence in unfiltered_text:
+            lowered = [word.lower() for word in sentence.split()]
+            if not any(word in lowered for word in filter_words):
+                filtered_text.append(sentence)
+
+        return filtered_text
 
 
-    def check_for_quotes(self, line):
+    def _get_sentiment(self):
+        return indicoio.sentiment(" ".join(self.text))
+
+    def _get_political(self):
+        return indicoio.political(" ".join(self.text))
+
+    def _get_summary(self):
+        return " ".join(self.summarizer.summarize(" ".join(self.text), 5))
+
+    def _check_for_quotes(self, line):
         count = line.count('"')
 
         if count == 0:
             return None
-        elif count % 2 != 0:
-            #raise Exception("Quotation marks are not even; error in parsing quotes")
+        elif count % 2 != 0: # TODO: This will be an edge case, ignore for now
             return None
         
         locations = [i for i, ltr in enumerate(line) if ltr == '"']
         quote_object = [ line[locations[i]:locations[i+1]+1] for i in xrange(0,count,2) ]
         return quote_object
 
-    def get_quotes(self):
+    def _get_quotes(self):
         quotes = {}
         potential = []
 
+        # Get potential quotes
+        keywords = ['said', 'says', 'told', '"'] # Possibly only need " character
         for line in self.raw_text:
-            if 'said' in line or 'says' in line or 'told' in line:
+            if [ True for i in keywords if i in line ]: 
                 potential.append(line)
 
+        # Extract only the sentence with the quote in it
+        new = []
+        for line in potential:
+            while( line.find('.') < line.find('"') ):
+                line = line[line.find('.')+1:].strip()
+                new.append(line)
+            else:
+                line = line.strip()
+                new.append(line)
+        potential = new
+
+        # Extract just the quoted section to check for redundancy later on
         for line in potential:
             tmp = self.check_for_quotes(line)
             if tmp != None:
-                quotes[line] = tmp
+                # TODO: Might switch tmp : line, so that quoted section can call full sentence
+                quotes[line] = tmp 
 
         return quotes
 
 if __name__ == "__main__":
-    myArticle = Article("http://www.theguardian.com/us-news/2015/sep/19/ted-cruz-hillary-clinton-mackinac-republican-leadership-conference")
+    myArticle = Article("http://www.cnn.com/2015/09/19/politics/donald-trump-muslims-controversy/index.html")
 
-    print myArticle.get_source()
-
+    #print myArticle.get_source()
+    for i in myArticle.quotes:
+        print i
+        print
