@@ -112,8 +112,8 @@ class Query(object):
 
     def fetch_articles(self):
         # TODO: REIMPLEMENT get_urls & not tmp
-        #urls = self.get_urls_tmp()
-        urls = self.get_urls()
+        urls = self.get_urls_tmp()
+        #urls = self.get_urls()
         firsts = []
         for i in urls:
             try:
