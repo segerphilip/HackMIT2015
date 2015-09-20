@@ -29,19 +29,27 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <script type="text/javascript">// <![CDATA[
         function preloader(){
             document.getElementById("loading").style.display = "none";
             document.getElementById("content").style.display = "block";
         }//preloader
         window.onload = preloader;
-// ]]></script>
+    </script>
+
+    <script>
+        $(document).ready(function(){
+            $("#page-top").fadeIn("slow")
+        });
+    </script>
 
 </head>
 
 <!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="display:none">
 
 <div class="inner-circles-loader" id='loading'>
     Loading…

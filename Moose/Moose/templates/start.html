@@ -19,12 +19,17 @@
     <!-- Custom CSS -->
     <link href="../static/css/scrolling-nav.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#positioning").fadeIn("slow")
+            $("#funnlbutton").click(function(){
+                $("#positioning").fadeOut("slow", function(){
+                    alert("hello")
+                });
+            });
+        });
+    </script>
 
 </head>
 <body>
@@ -32,7 +37,7 @@
     
     <div id="gallery-background"></div>
     <!--<img class=".img-responsive" src="images/background.jpg">-->
-    <div id="positioning">
+    <div id="positioning" style="display:none">
         <p class="heading">welcome to funnl</p>
         <p class="subheading">smart news, unified</p>
         <div id="loader">
@@ -41,7 +46,7 @@
 
          <form action="." method="POST">
             <input class = 'input' type="text" name="search" placeholder="search news">
-            <input class = 'button' type="submit" value="funnl">
+            <input id='funnlbutton' class = 'button' type="submit" value="funnl">
         </form>
     </div> 
     
