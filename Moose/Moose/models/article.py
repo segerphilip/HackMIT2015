@@ -10,14 +10,14 @@ class Article(object):
     indicoio.config.api_key = api_key
 
     def __init__(self, url):
+        self.summarizer = FrequencySummarizer()
+        
         self.url = url
         self.text = self._get_source()
-        # self.quotes = self._get_quotes()
-        # self.sentiment = self._get_sentiment()
-        # self.political = self._get_political()
-        # self.summary = self._get_summary()
-
-        #self.summarizer = FrequencySummarizer()
+        self.quotes = self._get_quotes()
+        self.sentiment = self._get_sentiment()
+        self.political = self._get_political()
+        self.summary = self._get_summary()
 
     def _get_source(self):
         article = NewsArticle(self.url)
@@ -78,7 +78,7 @@ class Article(object):
 
         # Get potential quotes
         keywords = ['said', 'says', 'told', '"'] # Possibly only need " character
-        for line in self.raw_text:
+        for line in self.text:
             if [ True for i in keywords if i in line ]: 
                 potential.append(line)
 
@@ -95,7 +95,7 @@ class Article(object):
 
         # Extract just the quoted section to check for redundancy later on
         for line in potential:
-            tmp = self.check_for_quotes(line)
+            tmp = self._check_for_quotes(line)
             if tmp != None:
                 # TODO: Might switch tmp : line, so that quoted section can call full sentence
                 quotes[line] = tmp 

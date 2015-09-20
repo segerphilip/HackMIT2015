@@ -15,6 +15,7 @@ class Query(object):
         self.facts = []
         self.articles = []#{'title':[], 'url':[], 'sentiment':[], 'political':[], 'summary':[]}
 
+
     def create_fake(self):
         self.facts = ['Pip is a good man', 'Byron is a person', 'Keenan is Keenan', 'Patrick smells']
         for i in xrange(10):
@@ -30,6 +31,7 @@ class Query(object):
         url = ''.join(template)
         return url
         
+
     def sort_urls(self, urls):
         ret = {'cnn':[], 'guardian':[], 'huffington':[], 'nytimes':[]}
         for i in urls:
@@ -43,6 +45,7 @@ class Query(object):
                 ret['nytimes'].append(i)
         
         return ret
+
 
     # TODO: Reimplement this over get_urls tmp
     def get_urls(self):
@@ -60,6 +63,7 @@ class Query(object):
 
         return self.sort_urls(urls)
 
+
     def get_urls_tmp(self):
         urls = []
         with open('backup_urls', 'r') as f:
@@ -67,6 +71,7 @@ class Query(object):
                 urls.append(line.strip())
 
         return self.sort_urls(urls)
+
 
     def fetch_articles(self):
         # TODO: REIMPLEMENT get_urls & not tmp
@@ -80,6 +85,7 @@ class Query(object):
             Articles.append(Article(link))
             
         return Articles
+
 
 if __name__ == '__main__':
     test = Query('ahmed mohamed')
