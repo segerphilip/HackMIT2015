@@ -1,6 +1,7 @@
 from newspaper import Article as NewsArticle
 import sys
 import os
+sys.path.append('./tools')
 sys.path.append('../tools')
 from FrequencySummarizer import FrequencySummarizer
 import indicoio
