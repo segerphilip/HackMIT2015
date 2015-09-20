@@ -25,15 +25,21 @@
             $("#positioning").fadeIn("slow")
             $("#funnlbutton").click(function(){
                 $("#positioning").fadeOut("fast", function(){
-                    // $('#gallery-background').fadeOut("fast")
+                    // Do some shit?
                 });
+                $('#loading').show()
             });
         });
     </script>
 
+
 </head>
 <body>
 
+
+    <div class="inner-circles-loader" id='loading' style='display:none'>
+        Loading…
+    </div><div id="loading"></div>
     
     <div id="gallery-background"></div>
     <!--<img class=".img-responsive" src="images/background.jpg">-->
