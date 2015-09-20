@@ -24,7 +24,7 @@ def requested_query():
 def article(text):
     query = Query(text)
     # facts, title, url, sentiment, political, summary
-    query.create_fake()
+    # query.create_fake()
     return render_template('index.html', facts=query.facts, articles=query.articles)
 
 if __name__ == '__main__':
