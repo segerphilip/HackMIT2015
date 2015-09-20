@@ -24,9 +24,27 @@
         $(document).ready(function(){
             $("#positioning").fadeIn("slow")
             $("#funnlbutton").click(function(){
-                $("#positioning").fadeOut("fast", function(){
+                $("#funnlsearch").fadeOut("fast", function(){
                     // Do some shit?
                 });
+                // $("#gallery-background").fadeOut("slow", function(){
+                //     // Do some shit?
+                // });
+                // $("#gallery-background").fadeIn("slow", function(){
+                //     // Do some shit?
+                // });
+                // $("#gallery-background").fadeOut("slow", function(){
+                //     // Do some shit?
+                // });
+                // $("#gallery-background").fadeIn("slow", function(){
+                //     // Do some shit?
+                // });
+                // $("#gallery-background").fadeOut("slow", function(){
+                //     // Do some shit?
+                // });
+                // $("#gallery-background").fadeIn("slow", function(){
+                //     // Do some shit?
+                // });
                 $('#loading').show()
             });
         });
@@ -37,23 +55,21 @@
 <body>
 
 
-    <div class="inner-circles-loader" id='loading' style='display:none'>
-        Loading…
-    </div><div id="loading"></div>
     
     <div id="gallery-background"></div>
     <!--<img class=".img-responsive" src="images/background.jpg">-->
     <div id="positioning" style="display:none">
         <p class="heading">welcome to funnl</p>
         <p class="subheading">smart news, unified</p>
-        <div id="loader">
-            
-        </div>
 
-         <form action="." method="POST">
+        <form id = 'funnlsearch' action="." method="POST">
             <input class = 'input' type="text" name="search" placeholder="search news">
             <input id='funnlbutton' class = 'button' type="submit" value="funnl">
         </form>
+
+        <div style="width:800px; margin:0 auto;">
+            <img src="../static/images/loader.gif" id="loading" style:"width:100px;height:100px">
+        </div>
     </div> 
     
 
