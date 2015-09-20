@@ -1,6 +1,5 @@
 from newspaper import Article as NewsArticle
 import indicoio
-import unidecode
 
 class Article(object):
 

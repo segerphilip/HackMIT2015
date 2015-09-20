@@ -1,0 +1,70 @@
+
+@font-face { font-family: Roboto-Light; src: url("../fonts/Roboto-Light.ttf"); } 
+
+#gallery-background {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background-image: url("../images/background.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    /*-webkit-filter: blur(5px);*/
+    filter: blur(5px);
+}
+
+p {
+    color: #FFFFFF;
+    font-family: Roboto-Light;
+    text-align: center;
+    opacity: 0.9;
+    position: relative;
+}
+
+form 
+{
+    position: relative;
+    text-align: center;
+}
+
+.heading{
+
+    font-size: 9vw;
+}
+
+.subheading {
+
+    font-size: 3.5vw;
+
+}
+
+.button {
+    color:#FFFFFF;
+    background-color:#33333D;
+    border-radius:5px;
+    font-family:'Roboto-Light';
+    border:none;
+    font-size:12px;
+    height:3em;
+    width: 7em;
+    margin-top: 1em;
+
+    top: 70%;
+}
+
+.input {
+    border-radius:0.5em;
+    height: 3em;
+    width: 20em;
+    border: none;
+    font-family:'Roboto-Light';
+    text-align: center;
+}
+
+#positioning {
+    top: 30%;
+    transform: translateY(70%);
+}
