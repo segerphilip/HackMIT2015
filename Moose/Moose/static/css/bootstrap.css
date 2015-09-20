@@ -11,6 +11,11 @@ html {
       -ms-text-size-adjust: 100%;
 }
 
+.padding {
+  padding-right: 100px;
+  padding-left: 100px;
+}
+
 
 body {
   margin: 0;
@@ -2206,7 +2211,8 @@ pre code {
     left: auto;
   }
   .col-lg-offset-12 {
-    margin-left: 100%;
+    margin-left: 80%;
+    margin-right: 80%;
   }
   .col-lg-offset-11 {
     margin-left: 91.66666667%;
