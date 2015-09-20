@@ -2,21 +2,21 @@ import urllib
 import requests
 import os
 import json
-
-API_KEY = os.getenv('GOOGLE_API')
-
-SEARCH_ENGINE_ID = '015040051912301786117:ukzldfl328w'
+from article import Article
+from facts import Facts
 
 
 class Query(object):
     def __init__(self, query):
+        self.API_KEY = os.getenv('GOOGLE_API')
+        self.SEARCH_ENGINE_ID = '015040051912301786117:ukzldfl328w'
         self.query = query.replace(' ','+')
 
     def generate_query(self, iteration):
         if iteration != 0:
-            template = ['https://www.googleapis.com/customsearch/v1?highrange&start=', str(iteration), '&key=',API_KEY,'&cx=',SEARCH_ENGINE_ID,'&q=', self.query]
+            template = ['https://www.googleapis.com/customsearch/v1?highrange&start=', str(iteration), '&key=',self.API_KEY,'&cx=',self.SEARCH_ENGINE_ID,'&q=', self.query]
         else: 
-            template = ['https://www.googleapis.com/customsearch/v1?highrange&key=',API_KEY,'&cx=',SEARCH_ENGINE_ID,'&q=', self.query]
+            template = ['https://www.googleapis.com/customsearch/v1?highrange&key=',self.API_KEY,'&cx=',self.SEARCH_ENGINE_ID,'&q=', self.query]
 
         url = ''.join(template)
         return url
@@ -24,17 +24,18 @@ class Query(object):
     def sort_urls(self, urls):
         ret = {'cnn':[], 'guardian':[], 'huffington':[], 'nytimes':[]}
         for i in urls:
-            if 'cnn' in i:
+            if 'cnn.com' in i:
                 ret['cnn'].append(i)
-            elif 'guardian' in i:
+            elif 'guardian.com' in i:
                 ret['guardian'].append(i)
-            elif 'huffington' in i:
+            elif 'huffingtonpost.com' in i:
                 ret['huffington'].append(i)
-            elif 'nytimes' in i:
+            elif 'nytimes.com' in i:
                 ret['nytimes'].append(i)
         
         return ret
 
+    # TODO: Reimplement this over get_urls tmp
     def get_urls(self):
         # Returns a dictionary object with links as the values
         urls = []
@@ -50,6 +51,30 @@ class Query(object):
 
         return self.sort_urls(urls)
 
+    def get_urls_tmp(self):
+        urls = []
+        with open('backup_urls', 'r') as f:
+            for line in f:
+                urls.append(line.strip())
+
+        return self.sort_urls(urls)
+
+    def fetch_articles(self):
+        # TODO: REIMPLEMENT get_urls & not tmp
+        urls = self.get_urls_tmp()
+        firsts = []
+        for i in urls:
+            firsts.append(urls[i][0])
+
+        Articles = []
+        for link in firsts:
+            Articles.append(Article(link))
+            
+        return Articles
+
 if __name__ == '__main__':
     test = Query('ahmed mohamed')
-    urls = test.get_urls()
+    Articles = test.fetch_articles()
+    facts = Facts(Articles)
+    for i in Articles:
+        print i.quotes
