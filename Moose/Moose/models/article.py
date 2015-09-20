@@ -13,6 +13,7 @@ class Article(object):
         self.summarizer = FrequencySummarizer()
         
         self.url = url
+        self.title = None
         self.text = self._get_source()
         self.quotes = self._get_quotes()
         self.sentiment = self._get_sentiment()
@@ -25,10 +26,13 @@ class Article(object):
         article.download()
         article.parse()
 
+        self.title = article.title
+
         raw_text = article.text
         raw_text = raw_text.encode("ascii", 'backslashreplace')
         raw_text = raw_text.replace('\\u201d', '"')
         raw_text = raw_text.replace('\\u201c', '"')
+        raw_text = raw_text.replace('\\u2014', '--')
         raw_text = raw_text.replace('\\u2019', '\'')
         raw_text = raw_text.replace('\\u2018', '\'')
         raw_text = raw_text.replace('\\u2026', '...')
@@ -105,7 +109,6 @@ class Article(object):
 if __name__ == "__main__":
     myArticle = Article("http://www.cnn.com/2015/09/19/politics/donald-trump-muslims-controversy/index.html")
 
-    #print myArticle.get_source()
     for i in myArticle.quotes:
         print i
         print

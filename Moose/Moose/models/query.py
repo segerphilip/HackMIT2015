@@ -15,6 +15,8 @@ class Query(object):
         self.facts = []
         self.articles = []#{'title':[], 'url':[], 'sentiment':[], 'political':[], 'summary':[]}
 
+        self.article_information()
+
 
     def create_fake(self):
         self.facts = ['Pip is a good man', 'Byron is a person', 'Keenan is Keenan', 'Patrick smells']
@@ -73,6 +75,27 @@ class Query(object):
         return self.sort_urls(urls)
 
 
+    def article_information(self):
+        Articles = self.fetch_articles()
+
+        for data in Articles:
+            tmp = {}
+            tmp['title'] = data.title
+            tmp['url'] = data.url
+            tmp['sentiment'] = data.sentiment
+            tmp['political'] = data.political
+            tmp['summary'] = data.summary
+
+            self.articles.append(tmp)
+
+        self.choosing_quotes(Articles)
+    
+
+    def choosing_quotes(self, Articles):
+        total_quotes = []
+        for item in Articles:
+            pass
+
     def fetch_articles(self):
         # TODO: REIMPLEMENT get_urls & not tmp
         urls = self.get_urls_tmp()
@@ -89,7 +112,10 @@ class Query(object):
 
 if __name__ == '__main__':
     test = Query('ahmed mohamed')
-    test.create_fake()
+
+    print test.articles
+
+    #test.create_fake()
 
     #Articles = test.fetch_articles()
     #facts = Facts(Articles)
